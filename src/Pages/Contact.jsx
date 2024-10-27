@@ -348,6 +348,14 @@ function Contact({ email }) {
   const userEmail = email ? email : "keerthigbalamurugan5@gmail.com";
 
   useEffect(() => {
+    
+    const localStorageContactImage = localStorage.getItem('form-image');
+
+    if(localStorageContactImage) {
+        const data = JSON.parse(localStorageContactImage);
+        setContactImage(data.formImage);
+        return;
+    } 
     fetchUserImage();
   }, []);
 

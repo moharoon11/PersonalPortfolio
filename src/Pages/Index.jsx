@@ -1,11 +1,38 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
+
 import keerthi6 from '../Assets/keerthi6.png';
 import { MdContentCopy } from "react-icons/md"; 
 import { IoLogoInstagram } from "react-icons/io5";
 import { BsLinkedin } from "react-icons/bs";
 import { IoLogoGithub } from "react-icons/io5";
 import Skills from './Skill';
+
+import styled, { keyframes } from 'styled-components';
+
+// Define spinner animation
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+// Style for the loader
+const Loader = styled.div`
+  border: 8px solid rgba(108, 92, 231, 0.2);
+  border-top: 8px solid #6c5ce7;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: ${spin} 1s linear infinite;
+`;
+
+// Center the loader in the viewport
+const LoaderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom, #ffffff, #f0f4ff);
+`;
 
 
 
@@ -258,7 +285,8 @@ const HamburgerIcon = styled.div`
     flex-direction: column;
     justify-content: space-around;
     position: fixed;
-    top: 2%;
+    top: 3%;
+    right: 7%;
   }
 
   div {
@@ -425,6 +453,15 @@ function Index() {
   };
 
 
+   // Function to download resume from server if available, else fallback to public resume
+   const downloadCV = () => {
+      const link = document.createElement('a');
+      link.href = '/resume.pdf'; // Make sure the resume is placed in the public folder
+      link.download = 'mohamed_haroon_resume.pdf';
+      link.click();
+  };
+
+
   const fetchUser = async () => {
     // Try to get data from local storage first
     const localStorageUserData = localStorage.getItem('user-details');
@@ -468,7 +505,7 @@ function Index() {
       setProfileImageType(userImage1Type);
   
       // Save data to local storage with an expiration time
-      const expiration = 5 * 60 * 1000; 
+      const expiration = 15 * 60 * 1000; 
       localStorage.setItem('user-details', JSON.stringify({
         name,
         about,
@@ -497,65 +534,73 @@ function Index() {
     fetchUser();
   }, []);
 
-  return (
+ return (
     <>
-    <Container>
-      <LeftSection>
-        <ProfileImageWrapper>
-          
-          <ProfileImage src={profileImage ? `data:${profileImageType};base64,${profileImage}` : fallbackProfileImage} alt="profileImage" />
-        </ProfileImageWrapper>
-      </LeftSection>
-      <RightSection>
-        <HamburgerIcon isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
-          <div />
-          <div />
-          <div />
-        </HamburgerIcon>
-        <Navbar isOpen={isOpen}>
-          <NavbarLink href="/">Portfolio</NavbarLink>
-          <NavbarLink href="#skills">Skill</NavbarLink>
-          <NavbarLink href="/project">Project</NavbarLink>
-          <ContactButton href="/contact">Contact me</ContactButton>
-        </Navbar>
-        <Content>
-          <Name>{name}</Name>
-          <Title>{role}</Title>
-          <AboutSection>
-          <AboutTitle>About Me</AboutTitle>
-          <AboutText>
-            {about}
-          </AboutText>
-        </AboutSection>
-        <ActionButtons>
-          <EmailButton>
-            {email}
-            <MdContentCopy onClick={copyEmailToClipboard} style={{ cursor: 'pointer', marginLeft: '10px', color: '#6c5ce7' }} />
-          </EmailButton>
-          <Notification visible={notificationVisible}>
-            Email copied to clipboard!
-          </Notification>
-          <Button href="#download">Download CV</Button>
-        </ActionButtons>
-        </Content>
-        <SocialLinks>
-          <a href="https://www.linkedin.com/in/keerthiga-b-300b501b5/" className="linkedin" data-tooltip="LinkedIn">
-            <BsLinkedin />
-          </a>
-          <a href="#github" className="github" data-tooltip="GitHub">
-            <IoLogoGithub />
-          </a>
-          <a href="https://www.instagram.com/_keerthi.11._/" className="instagram" data-tooltip="Instagram">
-            <IoLogoInstagram />
-          </a>
-        </SocialLinks>
-      </RightSection>
-    </Container>
-    <Skills className="skills"/>
-    <Footer>
-    <FooterText>© 2024 Keerthiga | <span>Made with Precision and Passion</span></FooterText>
-    </Footer>
-
+      {loading ? (
+         <LoaderWrapper>
+         <Loader />
+       </LoaderWrapper>
+      ) : (
+        <>
+          {/* Your main component content here */}
+          <Container>
+            <LeftSection>
+              <ProfileImageWrapper>
+                <ProfileImage
+                  src={profileImage ? `data:${profileImageType};base64,${profileImage}` : fallbackProfileImage}
+                  alt="profileImage"
+                />
+              </ProfileImageWrapper>
+            </LeftSection>
+            <RightSection>
+              <HamburgerIcon isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
+                <div />
+                <div />
+                <div />
+              </HamburgerIcon>
+              <Navbar isOpen={isOpen}>
+                <NavbarLink href="/">Portfolio</NavbarLink>
+                <NavbarLink href="#skills">Skill</NavbarLink>
+                <NavbarLink href="/project">Project</NavbarLink>
+                <ContactButton href="/contact">Contact me</ContactButton>
+              </Navbar>
+              <Content>
+                <Name>{name}</Name>
+                <Title>{role}</Title>
+                <AboutSection>
+                  <AboutTitle>About Me</AboutTitle>
+                  <AboutText>{about}</AboutText>
+                </AboutSection>
+                <ActionButtons>
+                  <EmailButton>
+                    {email}
+                    <MdContentCopy onClick={copyEmailToClipboard} style={{ cursor: 'pointer', marginLeft: '10px', color: '#6c5ce7' }} />
+                  </EmailButton>
+                  <Notification visible={notificationVisible}>
+                    Email copied to clipboard!
+                  </Notification>
+                  <Button onClick={downloadCV}>Download CV</Button>
+                </ActionButtons>
+              </Content>
+              <SocialLinks>
+                <a href="https://www.linkedin.com/in/keerthiga-b-300b501b5/" className="linkedin" data-tooltip="LinkedIn">
+                  <BsLinkedin />
+                </a>
+                <a href="#github" className="github" data-tooltip="GitHub">
+                  <IoLogoGithub />
+                </a>
+                <a href="https://www.instagram.com/_keerthi.11._/" className="instagram" data-tooltip="Instagram">
+                  <IoLogoInstagram />
+                </a>
+              </SocialLinks>
+            </RightSection>
+          </Container>
+          <Skills className="skills" />
+          <Footer>
+            <FooterText>© 2024 Keerthiga | <span>Made with Precision and Passion</span></FooterText>
+          </Footer>
+        </>
+      )}
     </>
   );
 }

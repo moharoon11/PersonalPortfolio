@@ -115,7 +115,7 @@ const Skills = () => {
 
     if (storedSkills && storedTime) {
       const timeDiff = currentTime - storedTime;
-      if (timeDiff < 2 * 60 * 1000) {
+      if (timeDiff < 15 * 60 * 1000) {
         setSkillSet(JSON.parse(storedSkills));
         return;
       }
