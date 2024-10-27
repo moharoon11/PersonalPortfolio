@@ -572,10 +572,11 @@ function Index() {
                   <AboutText>{about}</AboutText>
                 </AboutSection>
                 <ActionButtons>
-                  <EmailButton>
+                  <EmailButton onClick={copyEmailToClipboard}>
                     {email}
                     <MdContentCopy onClick={copyEmailToClipboard} style={{ cursor: 'pointer', marginLeft: '10px', color: '#6c5ce7' }} />
                   </EmailButton>
+                  
                   <Notification visible={notificationVisible}>
                     Email copied to clipboard!
                   </Notification>
