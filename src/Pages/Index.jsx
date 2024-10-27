@@ -459,6 +459,7 @@ function Index() {
 
 
   const handleCopyEmail = () => {
+    console.log("handle copy email::::", email)
     const forCopy = email ? email : "keerthigabalamurugan5@gmail.com"; // Replace with your actual email address
     
     // Create a temporary input element
@@ -476,7 +477,9 @@ function Index() {
     
     // Show notification
     setNotificationVisible(true);
-    setTimeout(() => setNotificationVisible(false), 2000); // Hide after 2 seconds
+    console.log("method executed perfectly");
+    setTimeout(() => setNotificationVisible(false), 2000); 
+    console.log("setting notification visiblity false");// Hide after 2 seconds
   };
 
 
