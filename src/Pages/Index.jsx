@@ -441,19 +441,42 @@ function Index() {
 
   const [notificationVisible, setNotificationVisible] = useState(false); // State for notification
 
-  const copyEmailToClipboard = () => {
-    navigator.clipboard.writeText(email)
-      .then(() => {
-        console.log("coming to method....", email);
-        setNotificationVisible(true); 
-        console.log("notification set to true for copying email");// Show notification
-        setTimeout(() => setNotificationVisible(false), 2000);
-        console.log("pring statement after message dissapears", email); // Hide after 2 seconds
-      })
-      .catch(err => {
-        console.log("error in copying the email");
-        console.error('Failed to copy: ', err);
-      });
+  // const copyEmailToClipboard = () => {
+  //   navigator.clipboard.writeText(email)
+  //     .then(() => {
+  //       console.log("coming to method....", email);
+  //       setNotificationVisible(true); 
+  //       console.log("notification set to true for copying email");// Show notification
+  //       setTimeout(() => setNotificationVisible(false), 2000);
+  //       console.log("pring statement after message dissapears", email); // Hide after 2 seconds
+  //     })
+  //     .catch(err => {
+  //       console.log("error in copying the email");
+  //       console.error('Failed to copy: ', err);
+  //     });
+  // };
+
+
+
+  const handleCopyEmail = () => {
+    const forCopy = email ? email : "keerthigabalamurugan5@gmail.com"; // Replace with your actual email address
+    
+    // Create a temporary input element
+    const tempInput = document.createElement('input');
+    tempInput.value = forCopy;
+    document.body.appendChild(tempInput);
+    
+    // Select the input value and copy it
+    tempInput.select();
+    tempInput.setSelectionRange(0, 99999); // For mobile devices
+    document.execCommand('copy');
+    
+    // Remove the input element
+    document.body.removeChild(tempInput);
+    
+    // Show notification
+    setNotificationVisible(true);
+    setTimeout(() => setNotificationVisible(false), 2000); // Hide after 2 seconds
   };
 
 
@@ -576,9 +599,9 @@ function Index() {
                   <AboutText>{about}</AboutText>
                 </AboutSection>
                 <ActionButtons>
-                  <EmailButton onClick={copyEmailToClipboard}>
+                  <EmailButton onClick={handleCopyEmail}>
                     {email}
-                    <MdContentCopy onClick={copyEmailToClipboard} style={{ cursor: 'pointer', marginLeft: '10px', color: '#6c5ce7' }} />
+                    <MdContentCopy onClick={handleCopyEmail} style={{ cursor: 'pointer', marginLeft: '10px', color: '#6c5ce7' }} />
                   </EmailButton>
                   
                   <Notification visible={notificationVisible}>
