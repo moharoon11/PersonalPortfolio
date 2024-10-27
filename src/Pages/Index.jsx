@@ -441,6 +441,8 @@ function Index() {
 
   const [notificationVisible, setNotificationVisible] = useState(false); // State for notification
 
+  // This method not working after deployement but working in localhost
+  // becuase navigator api is not available after deployment
   // const copyEmailToClipboard = () => {
   //   navigator.clipboard.writeText(email)
   //     .then(() => {
