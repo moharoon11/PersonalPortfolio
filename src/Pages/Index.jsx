@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import keerthi6 from '../Assets/keerthi6.png';
+import pic1 from '../Assets/pic1.png';
 import { MdContentCopy } from "react-icons/md"; 
 import { IoLogoInstagram } from "react-icons/io5";
 import { BsLinkedin } from "react-icons/bs";
@@ -524,7 +524,7 @@ function Index() {
       setAbout("A recent Bio Medical Graduate with a strong passion for software development");
       setEmail("keerthigabalamurugan5@gmail.com");
       setRole("FRESHER | JAVA DEVELOPER | SOFTWARE ENGINEER");
-      setProfileImage(keerthi6); // Assuming keerthi6 is imported or defined
+      setProfileImage(pic1); // Assuming keerthi6 is imported or defined
       console.log("Failed to fetch data from the server! Loading static data as fallback.");
     }
   };
@@ -583,13 +583,13 @@ function Index() {
                 </ActionButtons>
               </Content>
               <SocialLinks>
-                <a href="https://www.linkedin.com/in/keerthiga-b-300b501b5/" className="linkedin" data-tooltip="LinkedIn">
+                <a href="https://www.linkedin.com/in/keerthiga-b-300b501b5/" target="_blank" className="linkedin" data-tooltip="LinkedIn">
                   <BsLinkedin />
                 </a>
-                <a href="#github" className="github" data-tooltip="GitHub">
+                <a href="#" className="github" target="_blank" data-tooltip="GitHub">
                   <IoLogoGithub />
                 </a>
-                <a href="https://www.instagram.com/_keerthi.11._/" className="instagram" data-tooltip="Instagram">
+                <a href="https://www.instagram.com/_keerthi.11._/" target="_blank" className="instagram" data-tooltip="Instagram">
                   <IoLogoInstagram />
                 </a>
               </SocialLinks>

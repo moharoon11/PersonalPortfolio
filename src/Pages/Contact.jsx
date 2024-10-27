@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { IoLogoInstagram, IoLogoGithub } from "react-icons/io5";
 import { BsLinkedin } from "react-icons/bs";
-import keerthi6 from '../Assets/keerthi6.png';
+import pic2 from '../Assets/pic2.png';
 import { FaEnvelope, FaPhone } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 
@@ -32,7 +32,6 @@ const NavLinks = styled.div`
 
   @media (max-width: 480px) {
     font-size: 1rem;
-    gap: 5px;
   }
 `;
 
@@ -91,21 +90,6 @@ const Left = styled.div`
   }
 `;
 
-const ImageWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-
-  img {
-    width: 100%;
-    max-width: 200px;
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-    @media (max-width: 480px) {
-      max-width: 150px;
-    }
-  }
-`;
 
 const FormSection = styled.div`
   flex: 1.5;
@@ -336,6 +320,23 @@ const Loader = styled.div`
 `;
 
 
+const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+
+  img {
+    width: 100%;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    object-fit:cover;
+
+    
+  }
+`;
+
+
 function Contact({ email }) {
   const form = useRef(); 
   const [loading, setLoading] = useState(false);
@@ -345,7 +346,7 @@ function Contact({ email }) {
   const [notificationVisible, setNotificationVisible] = useState(false);
   const [contactImage, setContactImage] = useState(null);
   
-  const userEmail = email ? email : "keerthigbalamurugan5@gmail.com";
+  const userEmail = email ? email : "keerthigabalamurugan5@gmail.com";
 
   useEffect(() => {
     
@@ -356,6 +357,7 @@ function Contact({ email }) {
         setContactImage(data.formImage);
         return;
     } 
+
     fetchUserImage();
   }, []);
 
@@ -365,13 +367,13 @@ function Contact({ email }) {
       const data = await response.json();
       setContactImage(`data:${data.imageType};base64,${data.imageData}`);
 
-      const expiration = 5 * 60 * 1000;
+      const expiration = 15 * 60 * 1000;
       localStorage.setItem('form-image', JSON.stringify({
         formImage: `data:${data.imageType};base64,${data.imageData}`,
         expiration: Date.now() + expiration
       }));
     } catch (error) {
-      setContactImage(keerthi6);
+      setContactImage(pic2);
       console.log("Using fallback image.", error);
     }
   };
@@ -426,7 +428,7 @@ function Contact({ email }) {
       <ContactSection>
         <Left>
           <ImageWrapper>
-            <img src={contactImage} alt="Profile" />
+            <img src={contactImage || pic2} alt="Profile" />
           </ImageWrapper>
           <DetailsSection>
             <h2>CONTACT ME</h2>
@@ -439,15 +441,15 @@ function Contact({ email }) {
               <p>+91 8870257591</p>
             </Info>
             <SocialLinks>
-              <SocialButton href="https://www.linkedin.com/in/keerthiga-balamurugan-96b3a7227/" className="linkedin">
+              <SocialButton href="https://www.linkedin.com/in/keerthiga-b-300b501b5/" target="_blank" className="linkedin">
                 <BsLinkedin />
                 <span>LinkedIn</span>
               </SocialButton>
-              <SocialButton href="#" className="github">
+              <SocialButton href="#" className="github" target="_blank">
                 <IoLogoInstagram />
                 <span>Github</span>
               </SocialButton>
-              <SocialButton href="https://www.instagram.com/_keerthi_11/" className="instagram">
+              <SocialButton href="https://www.instagram.com/_keerthi.11._/" target="_blank" className="instagram">
                 <IoLogoInstagram />
                 <span>Instagram</span>
               </SocialButton>
