@@ -257,8 +257,8 @@ const HamburgerIcon = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    position: absolute;
-    top: -50%;
+    position: fixed;
+    top: 2%;
   }
 
   div {
@@ -366,13 +366,19 @@ const ActionButtons = styled.div`
 `;
 
 const Footer = styled.div`
-   width: 100%;
+   width: 98.9%;
    padding: 10px;
    margin-top: 20px;
    background-color: #6c5ce7;
    display: flex;
    align-items: center;
    justify-content: center;
+
+
+   @media (max-width:768px) {
+    display: none;
+   }
+
 
 `;
 
@@ -462,7 +468,7 @@ function Index() {
       setProfileImageType(userImage1Type);
   
       // Save data to local storage with an expiration time
-      const expiration = 5* 60 * 10000; // 1 minute
+      const expiration = 5 * 60 * 1000; 
       localStorage.setItem('user-details', JSON.stringify({
         name,
         about,
