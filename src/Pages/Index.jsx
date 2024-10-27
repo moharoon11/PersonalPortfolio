@@ -425,9 +425,9 @@ function Index() {
 
 
   
-  const [name, setName] = useState("");
+  const [name, setName] = useState("Keerthiga.B");
   const [about, setAbout] = useState("");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("keerthigabalamurugan5@gmail.com");
   const [role, setRole] = useState("");
 
   const [profileImage, setProfileImage] = useState(null);
