@@ -258,7 +258,7 @@ const HamburgerIcon = styled.div`
     flex-direction: column;
     justify-content: space-around;
     position: absolute;
-    top: -57%;
+    top: -50%;
   }
 
   div {
@@ -363,6 +363,24 @@ const ActionButtons = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative; // Position relative for the notification
+`;
+
+const Footer = styled.div`
+   width: 100%;
+   padding: 10px;
+   margin-top: 20px;
+   background-color: #6c5ce7;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+`;
+
+const FooterText = styled.div`
+   text-align: center;
+   color: #fff;
+   letter-spacing: 2px;
+
 `;
 
 function Index() {
@@ -515,19 +533,23 @@ function Index() {
         </ActionButtons>
         </Content>
         <SocialLinks>
-          <a href="#linkedin" className="linkedin" data-tooltip="LinkedIn">
+          <a href="https://www.linkedin.com/in/keerthiga-b-300b501b5/" className="linkedin" data-tooltip="LinkedIn">
             <BsLinkedin />
           </a>
           <a href="#github" className="github" data-tooltip="GitHub">
             <IoLogoGithub />
           </a>
-          <a href="#instagram" className="instagram" data-tooltip="Instagram">
+          <a href="https://www.instagram.com/_keerthi.11._/" className="instagram" data-tooltip="Instagram">
             <IoLogoInstagram />
           </a>
         </SocialLinks>
       </RightSection>
     </Container>
     <Skills className="skills"/>
+    <Footer>
+    <FooterText>© 2024 Keerthiga | <span>Made with Precision and Passion</span></FooterText>
+    </Footer>
+
     </>
   );
 }

@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import html from '../Assets/SkillImages/html.png';
+import css from '../Assets/SkillImages/css.png';
+import javascript from '../Assets/SkillImages/javascript.png';
+import java from '../Assets/SkillImages/java.png';
+import mysql from '../Assets/SkillImages/database.png';
+import databases from '../Assets/SkillImages/databaseimage.png';
+import problemsolving from '../Assets/SkillImages/problemsolving.png';
+
 const SkillsSection = styled.section`
   padding: 50px 20px;
   margin-bottom: 20px;
@@ -22,71 +30,76 @@ const SkillsTitle = styled.h2`
 `;
 
 const SkillsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 30px; /* Space between cards */
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px;
+  justify-content: center;
+  padding: 0 10px;
 `;
 
 const SkillCard = styled.div`
+  flex: 1 0 300px; /* Increase the minimum width per card */
+  max-width: 300px; /* Increase the max width per card */
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); /* Gradient background */
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  border-radius: 30px;
+  padding: 50px; /* Increase padding for larger container */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   color: #fff;
   transition: transform 0.3s, box-shadow 0.3s;
-  position: relative; /* Position for pseudo-element */
+  position: relative;
   overflow: hidden;
 
   &:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
   }
 
   @media (max-width: 768px) {
-    width: 90%; /* Make cards take 90% width on mobile */
+    width: 90%;
   }
 `;
 
 const SkillIcon = styled.img`
-  width: 80px; /* Increase icon size */
-  height: 80px; /* Increase icon size */
+  width: 100px; /* Increase icon width */
+  height: 100px; /* Increase icon height */
   border-radius: 50%;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   background-color: #fff;
-  padding: 10px;
+  padding: 12px; /* Increase padding for larger icon */
   object-fit: cover;
-  margin-bottom: 15px; /* Space below icon */
-  border: 3px solid #fff; /* Add a white border around the icon */
+  margin-bottom: 20px; /* Increase margin for better spacing */
+  border: 2px solid #fff;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.4), 0 0 15px rgba(245, 175, 25, 0.6);
+  }
 `;
 
 const SkillName = styled.h3`
-  font-size: 24px; /* Increase font size */
+  font-size: 24px;
   color: #fff;
   margin: 10px 0;
   font-weight: bold;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add text shadow for better visibility */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 
   @media (max-width: 768px) {
     font-size: 20px;
   }
 `;
 
-const SkillLevel = styled.p`
-  color: #f0f0f0; /* Change to a lighter color for better readability */
-  font-size: 16px; /* Increase font size */
-  margin: 0;
-  text-align: center; /* Center text */
-
-  @media (max-width: 768px) {
-    font-size: 14px;
-  }
-`;
-
-
+const hardcodedSkills = [
+  { skillId: 1, skillName: 'Java', skillIcon: java, sourceLink: '' },
+  { skillId: 2, skillName: 'MySQL', skillIcon: mysql, sourceLink: '' },
+  { skillId: 3, skillName: 'Problem Solving', skillIcon: problemsolving, sourceLink: '' },
+  { skillId: 4, skillName: 'HTML', skillIcon: html, sourceLink: ''},
+  { skillId: 5, skillName: 'CSS', skillIcon: css,  sourceLink: ''},
+  { skillId: 6, skillName: 'JavaScript', skillIcon: javascript, sourceLink: '' },
+  { skillId: 7, skillName: 'Databases', skillIcon: databases, sourceLink: '' },
+];
 
 const Skills = () => {
   const [skillSet, setSkillSet] = useState([]);
@@ -102,7 +115,7 @@ const Skills = () => {
 
     if (storedSkills && storedTime) {
       const timeDiff = currentTime - storedTime;
-      if (timeDiff < 3 * 60 * 1000) {
+      if (timeDiff < 2 * 60 * 1000) {
         setSkillSet(JSON.parse(storedSkills));
         return;
       }
@@ -122,7 +135,8 @@ const Skills = () => {
         localStorage.setItem('skillsTimestamp', currentTime);
       }
     } catch (error) {
-      console.error('Error fetching skills:', error);
+      setSkillSet(hardcodedSkills);
+      console.error('Error fetching skills loading static data to the web...', error);
     }
   };
 
@@ -131,10 +145,9 @@ const Skills = () => {
       <SkillsTitle>My Skills</SkillsTitle>
       <SkillsGrid>
         {skillSet.map(skill => (
-          <SkillCard key={skill.skillName}>
+          <SkillCard key={skill.skillId}>
             <SkillIcon src={skill.skillIcon} alt={`${skill.skillName} icon`} />
             <SkillName>{skill.skillName}</SkillName>
-            <SkillLevel>{skill.level}</SkillLevel>
           </SkillCard>
         ))}
       </SkillsGrid>
