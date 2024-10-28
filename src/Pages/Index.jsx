@@ -117,7 +117,7 @@ const Content = styled.div`
   text-align: center;
 
   @media (max-width: 768px) {
-    postion: relative;
+    position: relative;
     padding-top: 20px;
   }
 `;
@@ -596,6 +596,7 @@ function Index() {
                 <NavbarLink href="/project">Project</NavbarLink>
                 <ContactButton href="/contact">Contact me</ContactButton>
               </Navbar>
+
               <Content>
                 <Name>{name}</Name>
                 <Title>{role}</Title>
@@ -615,6 +616,7 @@ function Index() {
                   <Button onClick={downloadCV}>Download CV</Button>
                 </ActionButtons>
               </Content>
+
               <SocialLinks>
                 <a href="https://www.linkedin.com/in/keerthiga-b-300b501b5/" target="_blank" className="linkedin" data-tooltip="LinkedIn">
                   <BsLinkedin />
