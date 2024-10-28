@@ -119,6 +119,7 @@ const Content = styled.div`
   @media (max-width: 768px) {
     position: relative;
     padding-top: 20px;
+    margin-top: 200px;
   }
 `;
 
