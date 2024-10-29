@@ -19,7 +19,7 @@ function App() {
        <BrowserRouter>
           
           <Routes>
-            <Route path="/" element={<MainPageCorrection />} />
+            <Route path="/" element={<Index />} />
             <Route path="/skill" element={<Skill />} />
             <Route path="/project" element={<Project />} />
             <Route path="/contact" element={<Contact />} />
