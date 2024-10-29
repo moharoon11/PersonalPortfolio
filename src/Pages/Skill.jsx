@@ -14,6 +14,11 @@ const SkillsSection = styled.section`
   margin-bottom: 20px;
   background-color: ${({ theme }) => theme.background};
   text-align: center;
+
+  @media (max-width: 768px) {
+    margin-top: 60px;
+    
+  }
 `;
 
 const SkillsTitle = styled.h2`
@@ -25,6 +30,7 @@ const SkillsTitle = styled.h2`
   letter-spacing: 2px;
 
   @media (max-width: 768px) {
+    padding: 10px;
     font-size: 28px;
   }
 `;
@@ -35,6 +41,10 @@ const SkillsGrid = styled.div`
   gap: 80px;
   justify-content: center;
   padding: 0 10px;
+
+  @media (max-width: 768px) {
+     margin-top: 50px;
+  }
 `;
 
 const SkillCard = styled.div`
@@ -58,6 +68,7 @@ const SkillCard = styled.div`
   }
 
   @media (max-width: 768px) {
+    margin-top: 10px;
     width: 90%;
   }
 `;

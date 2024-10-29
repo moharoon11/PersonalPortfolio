@@ -77,12 +77,6 @@ const HamburgerIcon = styled.div`
 
 
 
-
-
-
-
-
-
 const Notification = styled.div`
   position: fixed;
   bottom: 20px;
@@ -121,7 +115,6 @@ const FooterText = styled.div`
    text-align: center;
    color: #fff;
    letter-spacing: 2px;
-
 `;
 
 
@@ -132,6 +125,7 @@ const Container = styled.div`
   display: grid;
   grid-template-columns: 1.1fr 0.51fr 2fr;
   height: 100vh;
+  
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -141,13 +135,16 @@ const Container = styled.div`
 
 
 const LeftSection = styled.div`
-    background: linear-gradient(135deg, #6c5ce7,
-     #5a4de7);
-     display: flex;
-  align-items: center;
-  justify-content: center;
+    background: linear-gradient(135deg, #6c5ce7, #5a4de7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
      position: relative;
-`
+
+     @media (max-width: 768px) {
+       height: 20vh;
+     }
+`;
 
 const ProfileImageWrapper = styled.div`
     background-color: red;
@@ -164,6 +161,16 @@ const ProfileImageWrapper = styled.div`
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
+  @media (max-width: 768px) {
+    width: 250px;
+    height: 250px;
+    left: 50%;
+    top: 15%;
+    transform: translateX(-50%);
+    padding: 0px;
+    border: 10px solid white;
+  }
+
 `;
 
 const ProfileImage = styled.img`
@@ -172,17 +179,26 @@ const ProfileImage = styled.img`
   object-fit: cover;
   border-radius: 50%;
   border: 5px solid #6c5ce7;
+
+  @media (max-width: 768px) {
+    border: none;
+  }
 `
 
 
 const FalseSection = styled.div`
-    background: linear-gradient(to bottom, #ffffff, #f0f4ff);
+     background: linear-gradient(to bottom, #ffffff, #f0f4ff);
 `;
 
 const RightSection = styled.div`
-  background: linear-gradient(to bottom, #ffffff, #f0f4ff);
-  position: relative;
+ background: linear-gradient(to bottom, #ffffff, #f0f4ff);
+ position: relative;
  
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 10px;
+    }
 `;
 
 const Navbar = styled.nav`
@@ -190,6 +206,22 @@ const Navbar = styled.nav`
     display: flex;
     align-items: center;
     justify-content: end;
+
+    @media (max-width: 768px) {
+    flex-direction: column;
+    gap: 10px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: ${(props) => (props.isOpen ? "100vh" : "0")};
+    background: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    transition: height 0.3s ease;
+    align-items: center;
+    justify-content: center;
+    z-index: 20;
+  }
 `;
 
 const NavbarLink = styled.a`
@@ -209,6 +241,11 @@ const NavbarLink = styled.a`
     background-color: #6c5ce7;
     box-shadow: 0 4px 8px rgba(108, 92, 231, 0.3);
     transform: scale(0.8);
+  }
+
+  @media (max-width: 768px) {
+    color: #fff;
+    font-size: 1.5rem;
   }
 `;
 
@@ -241,18 +278,35 @@ const ContactButton = styled.a`
 
 const Content = styled.div`
    margin-top: 180px;
+
+
+  @media (max-width: 768px) {
+    position: relative;
+    padding-top: 20px;
+    margin-top: 180px;
+  }
 `;
 
 const Name = styled.h1`
       font-size: 2.5rem;
       color: #333;
     margin-left: 120px;
+
+    @media (max-width: 768px) {
+      margin-left: 100px;
+    }
 `;
 
 const Title = styled.h2`
   font-size: 1.3rem;
   color: #777;
-     margin-left: 120px;
+  margin-left: 120px;
+
+  @media (max-width: 768px) {
+     margin-left: 30px;
+     text-align: center;
+     line-height: 1.7;
+  }
 `;
 
 const AboutSection = styled.div`
@@ -271,6 +325,8 @@ const AboutText = styled.p`
   color: #555;
   line-height: 1.5;
   text-align: justify;
+
+    
 `;
 
 
@@ -296,12 +352,14 @@ const EmailButton = styled.a`
   font-size: 18px;
   letter-spacing: 0.6px;
   
-  
-  
-  
 
   &:active {
     transform: scale(0.98); /* Button tap effect */
+  }
+
+  @media (max-width: 768px) {
+    font-size: 17px;
+    padding: 10px 10px;
   }
 `;
 
@@ -324,20 +382,23 @@ const Button = styled.a`
   &:hover {
     background-color: #5a4de7;
   }
+
+  @media (max-width: 768px) {
+     width: 50%;
+  }
    
 `;
 
 const SocialLinks = styled.div`
   position: absolute;
-  right: 5%;
+  right: 3%;
   top: 40%;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  
+
   a {
     font-size: 35px;
-
     padding: 10px;
     color: #6c5ce7;
     position: relative;
@@ -373,29 +434,10 @@ const SocialLinks = styled.div`
   }
 
   @media (max-width: 768px) {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(135deg, #6c5ce7, #5a4de7);
-    padding: 0px 0;
-    flex-direction: row;
-    justify-content: center;
-    z-index: 12;
-    
-
-  .linkedin {
-    color: white; /* Soft coral for a warm look */
-  }
-  .github {
-    color: white; /* Bright yellow for good contrast */
-  }
-  .instagram {
-    color: white; /* Calming blue to complement the teal */
-  }
-
+    display: none;
   }
 `;
+
 function MainPageCorrection() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -596,6 +638,7 @@ function MainPageCorrection() {
                 </ActionButtons>
               </Content>
 
+
               <SocialLinks>
                 <a href="https://www.linkedin.com/in/keerthiga-b-300b501b5/" target="_blank" className="linkedin" data-tooltip="LinkedIn">
                   <BsLinkedin />
@@ -607,7 +650,13 @@ function MainPageCorrection() {
                   <IoLogoInstagram />
                 </a>
               </SocialLinks>
+
+
             </RightSection>
+
+
+        
+           
           </Container>
           <Skills className="skills" />
           <Footer>
