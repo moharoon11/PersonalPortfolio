@@ -7,7 +7,7 @@ import Index from './Pages/Index';
 import Contact from './Pages/Contact';
 import Skill from './Pages/Skill';
 import Project from './Pages/Project';
-
+import MainPageCorrection from './Pages/MainPageCorrection';
 
 
 
@@ -19,7 +19,7 @@ function App() {
        <BrowserRouter>
           
           <Routes>
-            <Route path="/" element={<Index />} />
+            <Route path="/" element={<MainPageCorrection />} />
             <Route path="/skill" element={<Skill />} />
             <Route path="/project" element={<Project />} />
             <Route path="/contact" element={<Contact />} />
