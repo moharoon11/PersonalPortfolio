@@ -81,23 +81,7 @@ const HamburgerIcon = styled.div`
 
 
 
-const EmailButton = styled.a`
-  display: inline-block;
-  padding: 10px 20px;
-  color: #6c5ce7;
-  background-color: transparent;
-  border: 2px solid #6c5ce7;
-  border-radius: 5px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  
-  
 
-  &:active {
-    transform: scale(0.98); /* Button tap effect */
-  }
-`;
 
 const Notification = styled.div`
   position: fixed;
@@ -114,12 +98,7 @@ const Notification = styled.div`
   display: ${({ visible }) => (visible ? 'block' : 'none')};
 `;
 
-const ActionButtons = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative; // Position relative for the notification
-`;
+
 
 const Footer = styled.div`
    width: 98.9%;
@@ -261,25 +240,25 @@ const ContactButton = styled.a`
 
 
 const Content = styled.div`
-   margin-top: 220px;
+   margin-top: 180px;
 `;
 
 const Name = styled.h1`
       font-size: 2.5rem;
       color: #333;
-    margin-left: 150px;
+    margin-left: 120px;
 `;
 
 const Title = styled.h2`
   font-size: 1.3rem;
   color: #777;
-     margin-left: 150px;
+     margin-left: 120px;
 `;
 
 const AboutSection = styled.div`
     margin-top: 20px;
     width: 70%;
-    margin-left: 15%;
+    margin-left: 12%;
 `;
 
 const AboutTitle = styled.h3`
@@ -291,21 +270,132 @@ const AboutText = styled.p`
        font-size: 1.2rem;
   color: #555;
   line-height: 1.5;
+  text-align: justify;
 `;
 
 
+const ActionButtons = styled.div`
+   position: relative; // position relative for email notification
+`;
+
+
+const EmailButton = styled.a`
+  display: inline-block;
+  padding: 10px 20px;
+  color: #6c5ce7;
+  background-color: transparent;
+  border: 2px solid #6c5ce7;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  margin-left: 12%;
+  max-width: 500px;
+  flex-wrap: wrap;
+  font-size: 18px;
+  letter-spacing: 0.6px;
+  
+  
+  
+  
+
+  &:active {
+    transform: scale(0.98); /* Button tap effect */
+  }
+`;
 
 const Button = styled.a`
+  display: block;
+  width: 34%;
+  margin-top: 20px;
+  margin-left: 12%;
+  padding: 10px 20px;
+  text-align: center;
+  background-color: #6c5ce7;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-size: 1.2rem;
+
+
+  &:hover {
+    background-color: #5a4de7;
+  }
    
 `;
 
 const SocialLinks = styled.div`
+  position: absolute;
+  right: 5%;
+  top: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   
+  a {
+    font-size: 35px;
+
+    padding: 10px;
+    color: #6c5ce7;
+    position: relative;
+
+    &:hover {
+      color: #333;
+    }
+
+    &:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: 50%;
+      left: -80px;
+      background-color: black;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      transform: translateY(-50%);
+      white-space: nowrap;
+      z-index: 1;
+    }
+  }
+
+  .linkedin {
+    color: #0e76a8;
+  }
+  .github {
+    color: #333;
+  }
+  .instagram {
+    color: #c32aa3;
+  }
+
+  @media (max-width: 768px) {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #6c5ce7, #5a4de7);
+    padding: 0px 0;
+    flex-direction: row;
+    justify-content: center;
+    z-index: 12;
+    
+
+  .linkedin {
+    color: white; /* Soft coral for a warm look */
+  }
+  .github {
+    color: white; /* Bright yellow for good contrast */
+  }
+  .instagram {
+    color: white; /* Calming blue to complement the teal */
+  }
+
+  }
 `;
-
-
-
-
 function MainPageCorrection() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -495,7 +585,7 @@ function MainPageCorrection() {
                 </AboutSection>
                 <ActionButtons>
                   <EmailButton onClick={handleCopyEmail}>
-                    {email}
+                     {email}
                     <MdContentCopy onClick={handleCopyEmail} style={{ cursor: 'pointer', marginLeft: '10px', color: '#6c5ce7' }} />
                   </EmailButton>
                   
