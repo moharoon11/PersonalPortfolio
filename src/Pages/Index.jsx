@@ -490,7 +490,7 @@ function Index() {
    const downloadCV = () => {
       const link = document.createElement('a');
       link.href = '/resume.pdf'; // Make sure the resume is placed in the public folder
-      link.download = 'mohamed_haroon_resume.pdf';
+      link.download = 'MY_RESUME.pdf';
       link.click();
   };
 
@@ -538,7 +538,7 @@ function Index() {
       setProfileImageType(userImage1Type);
   
       // Save data to local storage with an expiration time
-      const expiration = 15 * 60 * 1000; 
+      const expiration = 5 * 60 * 1000; 
       localStorage.setItem('user-details', JSON.stringify({
         name,
         about,
@@ -561,6 +561,39 @@ function Index() {
       console.log("Failed to fetch data from the server! Loading static data as fallback.");
     }
   };
+
+
+
+  const fetchResume = async () => {
+    try {
+        const response = await fetch(`http://ec2-13-126-99-50.ap-south-1.compute.amazonaws.com:8888/api/users/resume/51120029`);
+        
+        // Ensure response data is parsed as JSON
+        const data = await response.json();
+
+        if (data.imageData && typeof data.imageData === 'string') {
+            // Handle base64-encoded string
+            const binary = Uint8Array.from(atob(data.imageData), char => char.charCodeAt(0));
+            const blob = new Blob([binary], { type: data.imageType });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'MY_RESUME.pdf';
+            link.click();
+        } else if (data.imageData instanceof ArrayBuffer) {
+            // If data is ArrayBuffer, create a Blob directly
+            const blob = new Blob([data.imageData], { type: data.imageType });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'MY_RESUME.pdf';
+            link.click();
+        } else {
+            console.error('Unsupported data format or empty image data.');
+        }
+        
+    } catch (error) {
+        console.error('Error downloading the file:', error);
+    }
+};
   
 
   useEffect(() => {
@@ -594,7 +627,6 @@ function Index() {
               <Navbar isOpen={isOpen}>
                 <NavbarLink href="/">Portfolio</NavbarLink>
                 <NavbarLink href="#skills">Skill</NavbarLink>
-                <NavbarLink href="/project">Project</NavbarLink>
                 <ContactButton href="/contact">Contact me</ContactButton>
               </Navbar>
 
@@ -614,7 +646,10 @@ function Index() {
                   <Notification visible={notificationVisible}>
                     Email copied to clipboard!
                   </Notification>
-                  <Button onClick={downloadCV}>Download CV</Button>
+                  <Button onClick={() => {
+                     fetchResume();
+                  }
+                  }>Download CV</Button>
                 </ActionButtons>
               </Content>
 
@@ -622,9 +657,7 @@ function Index() {
                 <a href="https://www.linkedin.com/in/keerthiga-b-300b501b5/" target="_blank" className="linkedin" data-tooltip="LinkedIn">
                   <BsLinkedin />
                 </a>
-                <a href="#" className="github" target="_blank" data-tooltip="GitHub">
-                  <IoLogoGithub />
-                </a>
+                
                 <a href="https://www.instagram.com/_keerthi.11._/" target="_blank" className="instagram" data-tooltip="Instagram">
                   <IoLogoInstagram />
                 </a>

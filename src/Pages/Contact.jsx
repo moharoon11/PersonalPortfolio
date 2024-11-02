@@ -346,7 +346,7 @@ function Contact({ email }) {
   const [notificationVisible, setNotificationVisible] = useState(false);
   const [contactImage, setContactImage] = useState(null);
   
-  const userEmail = email ? email : "keerthigabalamurugan5@gmail.com";
+  
 
   useEffect(() => {
     
@@ -367,7 +367,7 @@ function Contact({ email }) {
       const data = await response.json();
       setContactImage(`data:${data.imageType};base64,${data.imageData}`);
 
-      const expiration = 15 * 60 * 1000;
+      const expiration = 5 * 60 * 1000;
       localStorage.setItem('form-image', JSON.stringify({
         formImage: `data:${data.imageType};base64,${data.imageData}`,
         expiration: Date.now() + expiration
@@ -420,7 +420,6 @@ function Contact({ email }) {
       <Navbar>
         <NavLinks>
           <NavLink href="/">Portfolio</NavLink>
-          <NavLink href="/project">Project</NavLink>
           <NavLink href="#contact-form">Contact</NavLink>
         </NavLinks>
       </Navbar>
@@ -434,7 +433,7 @@ function Contact({ email }) {
             <h2>CONTACT ME</h2>
             <Info>
               <FaEnvelope />
-              <p>{userEmail}</p>
+              <p>{email}</p>
             </Info>
             <Info>
               <FaPhone />
@@ -445,10 +444,7 @@ function Contact({ email }) {
                 <BsLinkedin />
                 <span>LinkedIn</span>
               </SocialButton>
-              <SocialButton href="#" className="github" target="_blank">
-                <IoLogoInstagram />
-                <span>Github</span>
-              </SocialButton>
+            
               <SocialButton href="https://www.instagram.com/_keerthi.11._/" target="_blank" className="instagram">
                 <IoLogoInstagram />
                 <span>Instagram</span>
